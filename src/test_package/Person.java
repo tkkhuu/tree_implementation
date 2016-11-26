@@ -60,10 +60,10 @@ public class Person implements Comparable<Person>{
 		
 		Node<Person> m = person_bst.find_node(new Person("Mary", 15));
 		
-		System.out.println(m.get_value().get_name());
-		System.out.println(m.get_value().get_age());
-		Node<Person> balanced = person_bst.balance_tree(person_bst.get_list_of_node());
-		System.out.println(balanced.get_list_of_node());
+		//System.out.println(m.get_value().get_name());
+		//System.out.println(m.get_value().get_age());
+		Node<Person> balanced = person_bst.balance_tree();
+		balanced.show_tree();
 	}
 
 }

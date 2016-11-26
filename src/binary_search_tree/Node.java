@@ -76,26 +76,57 @@ public class Node<T>{
 		
 	}
 
-	public Node<T> balance_tree(List<T> lop){
+	public Node<T> balance_tree(){
 		
-		if (left_node == null && right_node == null){
-			return this;
+		// Get the list of all the nodes from this root
+		List<T> lop = get_list_of_node();
+		
+		if (lop.size() == 1) {
+			return new Node<T>(lop.get(0));
 		}
 		
+		if(lop.size() == 2) {
+			Node<T> new_root = new Node<T>(lop.get(1));
+			Node<T> child = new Node<T>(lop.get(0));
+			new_root.set_left_child(child);
+			return new_root;
+		}
+		
+		// Sort the list
 		Collections.sort(lop, gc);
 		
+		// The new root would be the middle node of the list
 		int root_index = lop.size() / 2;
-		
 		Node<T> new_root = new Node<T>(lop.get(root_index));
 		
+		// Get the remaining lists to the left and right of the new root
 		List<T> left_list = lop.subList(0, root_index - 1);
 		List<T> right_list = lop.subList(root_index + 1, lop.size());
 		
-		Node<T> new_left = new Node<T>(lop.get((root_index - 1)/ 2));
-		Node<T> new_right = new Node<T>(lop.get((lop.size() - root_index + 1) / 2));
+		// The left and right child of the new root would be the nodes next to it in the sorted list
+		Node<T> new_left_node = new Node<T>(lop.get(root_index - 1));
+		Node<T> new_right_node = new Node<T>(lop.get(root_index + 1));
 		
-		new_root.set_left_child(new_left.balance_tree(left_list));
-		new_root.set_right_child(new_right.balance_tree(right_list));
+		// Link all the nodes in the left and right sublist
+		Node<T> current_left = new_left_node;
+		for(T t : left_list){
+			Node<T> new_left_child = new Node<T>(t);
+			current_left.set_left_child(new_left_child);
+			current_left = new_left_child;
+		}
+		
+		Node<T> current_right = new_right_node;
+		for(T t : right_list){
+			Node<T> new_right_child = new Node<T>(t);
+			current_right.set_right_child(new_right_child);
+			current_right = new_right_child;
+		}
+		
+		//Node<T> new_left = new Node<T>(lop.get((root_index - 1)/ 2));
+		//Node<T> new_right = new Node<T>(lop.get((lop.size() - root_index + 1) / 2));
+		
+		new_root.set_left_child(new_left_node.balance_tree());
+		new_root.set_right_child(new_right_node.balance_tree());
 		
 		return new_root;
 	}
@@ -116,6 +147,16 @@ public class Node<T>{
 		
 		return lop;
 		
+	}
+	
+	public void show_tree(){
+		System.out.println(value);
+		if (left_node != null){
+			left_node.show_tree();
+		}
+		if (right_node != null) {
+			right_node.show_tree();
+		}
 	}
 	
 }
