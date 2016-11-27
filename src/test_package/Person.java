@@ -1,6 +1,6 @@
 package test_package;
 
-import binary_search_tree.Node;
+import binary_search_tree.BSNode;
 
 public class Person implements Comparable<Person>{
 	
@@ -55,15 +55,23 @@ public class Person implements Comparable<Person>{
 		Person fran = new Person("Fran", 14);
 		Person am = new Person("Am", 19);
 		
-		Node<Person> person_bst = new Node<Person>(brian, 	new Node<Person>(peter, new Node<Person>(tri), new Node<Person>(am)), 
-															new Node<Person>(mary, new Node<Person>(fran), new Node<Person>(lee)));
+		BSNode<Person> person_bst = new BSNode<Person>(peter, 	new BSNode<Person>(tri), 
+															new BSNode<Person>(lee, new BSNode<Person>(fran, new BSNode<Person>(mary),null), new BSNode<Person>(brian, new BSNode<Person>(am), null)));
 		
-		Node<Person> m = person_bst.find_node(new Person("Mary", 15));
+		//Node<Person> m = person_bst.find_node(new Person("Mary", 15));
 		
 		//System.out.println(m.get_value().get_name());
 		//System.out.println(m.get_value().get_age());
-		Node<Person> balanced = person_bst.balance_tree();
+		BSNode<Person> balanced = person_bst.balance_tree();
+		balanced.add_node(new Person("John", 7));
+		balanced.add_node(new Person("Christy", 6));
+		
+		
 		balanced.show_tree();
+		
+		BSNode<Person> new_bal = balanced.balance_tree();
+		System.out.println("===================");
+		new_bal.show_tree();
 	}
 
 }
