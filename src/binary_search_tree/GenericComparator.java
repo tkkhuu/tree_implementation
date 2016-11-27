@@ -2,7 +2,7 @@ package binary_search_tree;
 
 import java.util.Comparator;
 
-public class GenericComparator<T> implements Comparator<T>{
+public class GenericComparator<T extends Comparable<T>> implements Comparator<T>{
 
 	@Override
 	public int compare(T o1, T o2) {
