@@ -1,4 +1,4 @@
-package binary_search_tree;
+package bst;
 
 public class BinarySearchTreeException extends Exception {
 
