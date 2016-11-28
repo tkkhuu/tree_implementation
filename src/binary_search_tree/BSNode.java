@@ -291,6 +291,7 @@ public class BSNode<T extends Comparable<T>>{
 
 
 	}
+	
 	/**
 	 * Represent the BSNode to String to be printed out.
 	 */
